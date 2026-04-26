@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Every Ride</title>
+
+<style>
+body { margin:0; font-family: Arial; background:#f2f2f2; }
+.header { background:black; color:white; padding:15px; text-align:center; font-size:20px; }
+
+.card { background:white; margin:10px; padding:15px; border-radius:12px; }
+
+input { width:100%; padding:10px; margin-top:10px; border-radius:8px; border:1px solid #ccc; }
+
+.btn { width:100%; padding:12px; margin-top:10px; border:none; border-radius:8px; background:black; color:white; }
+
+.yellow { background:#FFC107; color:black; }
+
+.chat-btn { background:#eee; padding:10px; border-radius:8px; margin-top:5px; }
+
+.hidden { display:none; }
+
+.top-actions {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+
+.call-btn {
+  background:green;
+  color:white;
+  padding:10px;
+  border-radius:50%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">EVERY RIDE</div>
+
+<div class="top-actions">
+  <button class="call-btn" onclick="callCaptain()">📞</button>
+</div>
+
+<div class="card" id="book">
+  <h3>Book Ride</h3>
+  <input id="pickup" placeholder="Pickup Location">
+  <input id="drop" placeholder="Drop Location">
+  <button class="btn" onclick="findRide()">Find Ride</button>
+</div>
+
+<div class="card hidden" id="driver">
+  <h3>Captain Assigned</h3>
+  <p><b>Name:</b> Rahul Captain</p>
+  <p><b>Bike:</b> Hero Splendor</p>
+  <p><b>Number:</b> PB91C9206</p>
+  <p><b>Pickup Time:</b> <span id="time">3</span> mins</p>
+
+  <p><b>OTP:</b> <span id="otp"></span></p>
+
+  <button class="btn yellow" onclick="startRide()">Start Ride</button>
+  <button class="btn" onclick="cancelRide()">Cancel Ride</button>
+</div>
+
+<div class="card hidden" id="chat">
+  <h3>Chat</h3>
+  <div class="chat-btn">Are you coming?</div>
+  <div class="chat-btn">Waiting at pickup</div>
+  <div class="chat-btn">My location is as per map</div>
+  <div class="chat-btn">Message when reached</div>
+
+  <input id="msg" placeholder="Type here...">
+  <button class="btn" onclick="sendMsg()">Send</button>
+</div>
+
+<div class="card hidden" id="ride">
+  <h3>Ride Ongoing...</h3>
+  <p>Distance: 2.5 KM</p>
+  <p>Fare: ₹45</p>
+
+  <button class="btn" onclick="completeRide()">Complete Ride</button>
+</div>
+
+<div class="card hidden" id="cancelBox">
+  <h3>Cancel Reason</h3>
+  <div class="chat-btn">Taking too long</div>
+  <div class="chat-btn">Change of plan</div>
+  <div class="chat-btn">Wrong location</div>
+</div>
+
+<div class="card hidden" id="rating">
+  <h3>Rate Your Ride</h3>
+  ⭐⭐⭐⭐⭐
+  <button class="btn">Submit</button>
+</div>
+
+<script>
+function findRide() {
+  document.getElementById("book").classList.add("hidden");
+  document.getElementById("driver").classList.remove("hidden");
+  document.getElementById("chat").classList.remove("hidden");
+
+  let otp = Math.floor(1000 + Math.random()*9000);
+  document.getElementById("otp").innerText = otp;
+
+  let time = 3;
+  let interval = setInterval(()=>{
+    time--;
+    document.getElementById("time").innerText = time;
+    if(time<=0) clearInterval(interval);
+  },1000);
+}
+
+function startRide() {
+  alert("OTP Verified. Ride Started");
+  document.getElementById("ride").classList.remove("hidden");
+}
+
+function cancelRide() {
+  document.getElementById("cancelBox").classList.remove("hidden");
+}
+
+function completeRide() {
+  document.getElementById("rating").classList.remove("hidden");
+}
+
+function sendMsg() {
+  alert("Message Sent");
+}
+
+function callCaptain() {
+  alert("Calling Captain...");
+}
+</script>
+
+</body>
+</html>
