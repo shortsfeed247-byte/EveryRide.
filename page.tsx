@@ -1,43 +1,39 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import MapComponent from "@/MapComponent";
 
-export default function Home() {
-  const router = useRouter();
-
+export default function Dashboard() {
   return (
-    <div style={{padding:20, fontFamily:"sans-serif"}}>
+    <div style={{ height: "100vh", width: "100%" }}>
       
-      <h1 style={{fontSize:28, fontWeight:"bold"}}>EVERY RIDE</h1>
-      <p style={{color:"#666"}}>Book your ride instantly</p>
-
-      <div style={{
-        marginTop:20,
-        padding:20,
-        borderRadius:12,
-        background:"#f5f5f5"
-      }}>
-        <p>📍 Pickup Location</p>
-        <input placeholder="Enter pickup" style={{width:"100%", padding:10, marginTop:5}}/>
-
-        <p style={{marginTop:10}}>📍 Drop Location</p>
-        <input placeholder="Enter destination" style={{width:"100%", padding:10, marginTop:5}}/>
+      {/* MAP */}
+      <div style={{ height: "70%" }}>
+        <MapComponent />
       </div>
 
-      <button 
-        onClick={() => router.push("/user/dashboard")}
-        style={{
-          marginTop:20,
-          width:"100%",
-          padding:15,
-          background:"black",
-          color:"white",
-          borderRadius:10,
-          fontSize:16
-        }}
-      >
-        🚀 Book Ride
-      </button>
+      {/* BOTTOM CARD */}
+      <div style={{
+        height: "30%",
+        background: "white",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        padding: 20,
+        boxShadow: "0 -5px 20px rgba(0,0,0,0.1)"
+      }}>
+        <h2>EVERY RIDE</h2>
+        <p>Nearby Drivers Available</p>
+
+        <button style={{
+          width: "100%",
+          padding: 15,
+          background: "black",
+          color: "white",
+          borderRadius: 10,
+          marginTop: 10
+        }}>
+          🚀 Book Instant Ride
+        </button>
+      </div>
 
     </div>
   );
